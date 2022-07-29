@@ -1,5 +1,6 @@
 import './style.scss';
-console.log("Hello race");
+import { getCars, getCountCars } from './components/ui/uiBasic';
+
 const body = document.body;
 const logoContainer = document.createElement('header');
 logoContainer.className = 'container-logo';
@@ -47,7 +48,6 @@ gitLink.className = 'git-link';
 gitLink.href = 'https://github.com/RigelTLT';
 gitLink.innerHTML = ' Github';
 footerContainerOne.append(gitLink);
-
 const footerContainerTwo = document.createElement('div');
 footerContainerTwo.className = 'footer__container';
 footer.append(footerContainerTwo);
@@ -60,3 +60,6 @@ rsImg.className = 'rs-img';
 rsImg.src = 'https://rs.school/images/rs_school_js.svg';
 rsImg.alt = 'Rolling Scopes School';
 rsLink.append(rsImg);
+(async () => {
+  console.log(await getCountCars())
+})()
