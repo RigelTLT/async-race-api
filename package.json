@@ -2,10 +2,12 @@
   "name": "async-race-api",
   "version": "1.0.0",
   "description": "Fun with promises",
+  "main": "index.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve --env development",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "start": "node index.js"
   },
   "author": "mikhama",
   "license": "MIT",
