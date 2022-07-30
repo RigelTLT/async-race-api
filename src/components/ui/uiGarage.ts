@@ -15,7 +15,7 @@ export async function createCar(body: IparamsCar) {
   return employee;
 }
 export async function updateCar(id: number,body: IparamsCar) {
-  const response = await fetch(`${baseUrl}${path.garage}/:${id}`, {
+  const response = await fetch(`${baseUrl}${path.garage}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export async function updateCar(id: number,body: IparamsCar) {
   return employee;
 }
 export async function deleteCar(id: number) {
-  const response = await fetch(`${baseUrl}${path.garage}/:${id}`, {
+  const response = await fetch(`${baseUrl}${path.garage}/${id}`, {
     method: "DELETE",
   });
   const employee = await response.json();
