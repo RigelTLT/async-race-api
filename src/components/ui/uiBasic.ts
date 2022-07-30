@@ -4,11 +4,11 @@ export const path = {
   engine: '/engine',
   winners: '/winners'
 }
-interface Iparams{
-  key: string;
-  val: string;
+export interface Iparams{
+  _page: string;
+  _limit: string;
 }
-const generatorQueryString =(params: Iparams )=> Object.keys(params).length ? `?${Object.values(params).map (el => `${el.key}=${el.val}`).join('&')}` : '';
+const generatorQueryString =(params: Iparams )=> Object.keys(params).length ? `?${Object.entries(params).map (el => `${el[0]}=${el[1]}`).join('&')}` : '';
 
 
 export async function getCars (params?: Iparams){

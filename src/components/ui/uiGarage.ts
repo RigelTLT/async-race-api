@@ -1,5 +1,5 @@
 import { baseUrl, path } from "./uiBasic";
-interface IparamsCar{
+export interface IparamsCar{
   name: string;
   color: string;
 }
@@ -10,6 +10,24 @@ export async function createCar(body: IparamsCar) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
+  });
+  const employee = await response.json();
+  return employee;
+}
+export async function updateCar(id: number,body: IparamsCar) {
+  const response = await fetch(`${baseUrl}${path.garage}/:${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const employee = await response.json();
+  return employee;
+}
+export async function deleteCar(id: number) {
+  const response = await fetch(`${baseUrl}${path.garage}/:${id}`, {
+    method: "DELETE",
   });
   const employee = await response.json();
   return employee;

@@ -1,5 +1,6 @@
 import './style.scss';
 import { getCars, getCountCars } from './components/ui/uiBasic';
+import { createPageGarage } from './components/garage/garage';
 
 const body = document.body;
 const logoContainer = document.createElement('header');
@@ -33,6 +34,17 @@ navbarLiTwo.append(buttonWinners);
 const main = document.createElement('main');
 main.className = 'main';
 body.append(main);
+
+const garage = document.createElement('section');
+garage.className = 'garage';
+main.append(garage);
+
+
+
+
+
+
+
 const footer = document.createElement('footer');
 footer.className = 'footer';
 body.append(footer);
@@ -60,6 +72,9 @@ rsImg.className = 'rs-img';
 rsImg.src = 'https://rs.school/images/rs_school_js.svg';
 rsImg.alt = 'Rolling Scopes School';
 rsLink.append(rsImg);
+
 (async () => {
   console.log(await getCountCars())
-})()
+})();
+
+createPageGarage();
