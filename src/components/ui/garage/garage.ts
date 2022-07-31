@@ -1,5 +1,5 @@
-import { clickCreateCar } from './../events/eventsGarage';
-import { refreshList } from './../events/refresh';
+import { eventAddCar } from '../../events/addEventsGarage';
+import { createhList } from './createList';
 
 export async function createCarForm(){
   const garage = document.querySelector('.garage') as HTMLElement;
@@ -17,7 +17,7 @@ export async function createCarForm(){
   createButtonCar.className = 'button-car button-car__create';
   createButtonCar.innerHTML = 'Create';
   garage.append(createButtonCar);
-  createButtonCar.addEventListener('click', clickCreateCar);
+  eventAddCar();
 }
 
 export async function updateCarForm(){
@@ -74,5 +74,5 @@ export function createPageGarage(){
   updateCarForm();
   GenerateCarsForm();
   buttonRaceForm();
-  refreshList();
+  createhList();
 }

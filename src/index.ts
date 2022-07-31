@@ -1,6 +1,5 @@
 import './style.scss';
-import { getCars, getCountCars } from './components/ui/uiBasic';
-import { createPageGarage } from './components/garage/garage';
+import { createPageGarage } from './components/ui/garage/garage';
 
 const body = document.body;
 const logoContainer = document.createElement('header');
@@ -38,12 +37,6 @@ body.append(main);
 const garage = document.createElement('section');
 garage.className = 'garage';
 main.append(garage);
-
-
-
-
-
-
 
 const footer = document.createElement('footer');
 footer.className = 'footer';

@@ -1,8 +1,6 @@
-import { baseUrl, path } from "./uiBasic";
-export interface IparamsCar{
-  name: string;
-  color: string;
-}
+import { baseUrl, path } from "./apiBasic";
+import {IparamsCar} from "./../interface/interface"
+
 export async function createCar(body: IparamsCar) {
   const response = await fetch(`${baseUrl}${path.garage}`, {
     method: "POST",

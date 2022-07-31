@@ -1,38 +1,39 @@
-import { getCars, getCountCars } from './../ui/uiBasic';
-import { updateCar, deleteCar } from './../ui/uiGarage';
+import { getCars, getCountCars } from '../../api/apiBasic';
+import {ICarBase} from '../../interface/interface';
+import { eventDeleteCar } from '../../events/addEventsGarage';
 
-function createControlCarForm(id: number): void {
+export function createControlCarForm(id: number): void {
   const elemetListGarage = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
   const carControl = document.createElement('div');
   carControl.className = 'control-car';
   elemetListGarage.append(carControl);
   const startButtonCar = document.createElement('button');
-  startButtonCar.className = 'button-race';
+  startButtonCar.className = 'button-race button-start-race';
   startButtonCar.innerHTML = 'Start Car';
   startButtonCar.setAttribute('data-id', `${id}`);
   carControl.append(startButtonCar);
   const resetButtonCar = document.createElement('button');
-  resetButtonCar.className = 'button-race';
+  resetButtonCar.className = 'button-race button-reset';
   resetButtonCar.innerHTML = 'Reset Car';
+  resetButtonCar.disabled = true;
   resetButtonCar.setAttribute('data-id', `${id}`);
   carControl.append(resetButtonCar);
   const editButtonCar = document.createElement('button');
-  editButtonCar.className = 'button-car';
+  editButtonCar.className = 'button-car button-edit';
   editButtonCar.innerHTML = 'Edit Car';
   editButtonCar.setAttribute('data-id', `${id}`);
   carControl.append(editButtonCar);
   const deleteButtonCar = document.createElement('button');
-  deleteButtonCar.className = 'button-car';
+  deleteButtonCar.className = 'button-car button-delete';
   deleteButtonCar.innerHTML = 'Delete Car';
   deleteButtonCar.setAttribute('data-id', `${id}`);
-  deleteButtonCar.addEventListener('click', clickDeleteCar);
   carControl.append(deleteButtonCar);
+  eventDeleteCar();
 }
-async function createTraceCar(element:{name: string, color: string, id: number}): Promise<void> {
+export async function createTraceCar(element: ICarBase): Promise<void> {
   const elemetListGarage = document.querySelector(`.garage-list__element[data-id="${element.id}"]`) as HTMLElement;
   const nameCar = document.createElement('h3');
   nameCar.className = 'name-car';
-  console.log(element.id);
   nameCar.innerHTML = element.name;
   elemetListGarage.append(nameCar);
   const carTrace = document.createElement('div');
@@ -66,7 +67,6 @@ async function listGarage(page?: number): Promise<void> {
   containerListGarage.append(listGarage);
   countCars.map((element:{name: string, color: string, id: number}) => {
     if(element){
-      console.log(element.id);
       const elemetListGarage = document.createElement('li');
     elemetListGarage.className = 'garage-list__element';
     elemetListGarage.setAttribute('data-id', `${element.id}`);
@@ -98,20 +98,23 @@ async function TitleGarage(): Promise<void> {
   ListPage.className = 'container-list__page';
   containerListGarage.append(ListPage);
   const prevListPage = document.createElement('button');
-  prevListPage.className = 'button-list';
+  prevListPage.className = 'button-list prev';
   prevListPage.innerHTML = 'Prev';
   prevListPage.value = 'Prev';
   prevListPage.disabled = true;
   ListPage.append(prevListPage);
   const nextListPage = document.createElement('button');
-  nextListPage.className = 'button-list';
+  nextListPage.className = 'button-list next';
   nextListPage.innerHTML = 'Next';
   nextListPage.value = 'Next';
+  if(countCars < 7){
+  nextListPage.disabled = true;
+  }
   ListPage.append(nextListPage);
   listGarage();   
 }
 
-export function refreshList():void {
+export function createhList():void {
   const garageList = document.querySelector('.container-garage-list') as HTMLElement;
   if(garageList){
     garageList.remove();
@@ -119,9 +122,3 @@ export function refreshList():void {
   TitleGarage();
 }
 
-export async function clickDeleteCar(event: Event): Promise<void>{
-  const id = (event.target as HTMLElement).getAttribute('data-id');
-  console.log(id);
-  await deleteCar(Number(id));
-  refreshList();
-}
