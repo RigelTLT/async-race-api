@@ -1,6 +1,16 @@
-import { baseUrl, path } from "./apiBasic";
-import {IparamsCar} from "./../interface/interface"
+import { baseUrl, path, generatorQueryString } from "./apiBasic";
+import {IparamsCar} from "./../interface/interface";
+import {Iparams} from "./../interface/interface"
 
+export async function getCars (params?: Iparams){
+  const response = await fetch(`${baseUrl}${path.garage}${params ? generatorQueryString(params):''}`);
+  const data = await response.json();
+  return data;
+  }
+  export async function getCountCars(){
+    const countCars = await getCars(); 
+    return countCars.length;
+  }
 export async function createCar(body: IparamsCar) {
   const response = await fetch(`${baseUrl}${path.garage}`, {
     method: "POST",

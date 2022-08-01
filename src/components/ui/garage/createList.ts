@@ -1,6 +1,6 @@
-import { getCars, getCountCars } from '../../api/apiBasic';
+import { getCars, getCountCars } from '../../api/apiGarage';
 import {ICarBase} from '../../interface/interface';
-import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar } from '../../events/addEventsGarage';
+import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar } from '../../events/garage/addEventsGarage';
 
 export function createControlCarForm(id: number): void {
   const elemetListGarage = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;

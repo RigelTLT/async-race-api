@@ -1,6 +1,6 @@
-import {getCountCars, getCars} from './../api/apiBasic';
-import {ICarBase} from './../interface/interface';
-import {createControlCarForm, createTraceCar} from '../ui/garage/createList'
+import {getCountCars, getCars} from '../../api/apiGarage';
+import {ICarBase} from '../../interface/interface';
+import {createControlCarForm, createTraceCar} from '../../ui/garage/createList'
 
 async function replaceCars(idBaseNumber: number){
   const listCars = await getCars();

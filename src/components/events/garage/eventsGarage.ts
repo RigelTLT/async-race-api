@@ -1,7 +1,6 @@
-import { createCar, updateCar, deleteCar } from './../api/apiGarage';
-import { addCarsList, deleteCarsList, updateCarsList } from './refreshList';
-import { IparamsCar } from './../interface/interface'
-import { getCars} from './../api/apiBasic';
+import { getCars, createCar, updateCar, deleteCar } from '../../api/apiGarage';
+import { addCarsList, deleteCarsList, updateCarsList } from './refreshGarageList';
+import { IparamsCar } from '../../interface/interface'
 
 function componentToHex(c:number) {
   const hex = c.toString(16);
@@ -63,7 +62,7 @@ export function chekerUpdate(event: Event){
   colorCar.value = rgbToHex(valueColorCar);
 }
 
-export async function unlockUpdateCar(): Promise<void>{
+export function unlockUpdateCar(){
   const idUpdate = (document.querySelector('.update-car') as HTMLElement).getAttribute('data-id');
   clickUpdateCar(Number(idUpdate));
 }

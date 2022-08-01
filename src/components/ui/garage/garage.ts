@@ -1,4 +1,4 @@
-import { eventAddCar } from '../../events/addEventsGarage';
+import { eventAddCar } from '../../events/garage/addEventsGarage';
 import { createhList } from './createList';
 
 export async function createCarForm(){

@@ -1,5 +1,6 @@
 import './style.scss';
 import { createPageGarage } from './components/ui/garage/garage';
+import {getWinners} from './components/api/apiWinner'
 
 const body = document.body;
 const logoContainer = document.createElement('header');
@@ -37,6 +38,9 @@ body.append(main);
 const garage = document.createElement('section');
 garage.className = 'garage';
 main.append(garage);
+const winners = document.createElement('section');
+winners.className = 'winners';
+main.append(winners);
 
 const footer = document.createElement('footer');
 footer.className = 'footer';
@@ -67,3 +71,8 @@ rsImg.alt = 'Rolling Scopes School';
 rsLink.append(rsImg);
 
 createPageGarage();
+
+async function test(){
+  await getWinners({_page: '1', _limit: '7', _sort: 'id', _order:'ASC'});
+}
+test();
