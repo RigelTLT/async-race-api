@@ -1,6 +1,7 @@
 import { createCar, updateCar, deleteCar } from './../api/apiGarage';
-import { refreshList } from './refreshList';
-import { IparamsCar } from './../interface/interface'
+import { addCarsList, deleteCarsList } from './refreshList';
+import { IparamsCar, ICarBase } from './../interface/interface'
+import { getCars} from './../api/apiBasic';
 
 export async function clickCreateCar(){
   const nameCar = document.querySelector('.name-car__create') as HTMLInputElement;
@@ -11,13 +12,20 @@ export async function clickCreateCar(){
   };
   const result = await createCar(body);
   if(result){
-    refreshList('Create', result.id, result);
+    addCarsList(result.id, result);
   }
 }
 
 export async function clickDeleteCar(event: Event): Promise<void>{
   const id = (event.target as HTMLElement).getAttribute('data-id');
   const numberId = Number(id);
-  //await deleteCar(numberId);
-  refreshList('Delete', numberId);
+  const listCars = await getCars();
+  let nextNumberListId =0;
+  for(let i = 0; i < listCars.length;i++){
+    if(listCars[i].id === numberId){
+      nextNumberListId = i;
+    }
+  }
+  await deleteCar(numberId);
+  deleteCarsList(numberId, nextNumberListId);
 }
