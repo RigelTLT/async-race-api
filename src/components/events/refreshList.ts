@@ -69,3 +69,16 @@ export async function deleteCarsList(id: number, nextNumberListId: number){
   deleteCar.remove();
 }
 }
+export async function updateCarsList(id: number, element: ICarBase){
+  const updateCar = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
+  const nameCar = updateCar.childNodes[1] as HTMLElement;
+  const ColorCar = (updateCar.childNodes[2].firstChild as HTMLElement).firstChild as HTMLElement;
+  ColorCar.style.fill = element.color;
+  nameCar.innerHTML = element.name;
+  const nameInputCar = document.querySelector('.name-car__update') as HTMLInputElement;
+  const colorInputCar = document.querySelector('.color-car__update') as HTMLInputElement;
+  const button = document.querySelector('.button-car__update') as HTMLInputElement;
+  nameInputCar.disabled = true;
+  colorInputCar.disabled = true;
+  button.disabled = true;
+}
