@@ -40,9 +40,16 @@ export async function clickDeleteCar(event: Event): Promise<void>{
   await deleteCar(numberId);
   deleteCarsList(numberId, nextNumberListId);
 }
-export async function unlockUpdateCar(event: Event): Promise<void>{
+
+export function chekerUpdate(event: Event){
   const id = (event.target as HTMLElement).getAttribute('data-id');
-  const numberId = Number(id);
+  const updateButtomCar = document.querySelectorAll(`.button-edit`);
+  for(let i=0; i< updateButtomCar.length; i++){
+    if(updateButtomCar[i].classList.contains('update-car')){
+      updateButtomCar[i].classList.remove('update-car');
+    }
+  }
+  (event.target as HTMLElement).classList.add('update-car');
   const updateCar = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
   const valueNameCar = (updateCar.childNodes[1] as HTMLElement).innerHTML;
   const valueColorCar = ((updateCar.childNodes[2].firstChild as HTMLElement).firstChild as HTMLElement).style.fill;
@@ -54,7 +61,11 @@ export async function unlockUpdateCar(event: Event): Promise<void>{
   button.disabled = false;
   nameCar.value = valueNameCar;
   colorCar.value = rgbToHex(valueColorCar);
-  button.addEventListener('click', ()=>(clickUpdateCar(numberId)));
+}
+
+export async function unlockUpdateCar(): Promise<void>{
+  const idUpdate = (document.querySelector('.update-car') as HTMLElement).getAttribute('data-id');
+  clickUpdateCar(Number(idUpdate));
 }
 export async function clickUpdateCar(id: number): Promise<void>{
   const nameCar = document.querySelector('.name-car__update') as HTMLInputElement;
@@ -63,8 +74,7 @@ export async function clickUpdateCar(id: number): Promise<void>{
     name: nameCar.value,
     color: colorCar.value
   };
-  const result = await createCar(body);
-  console.log(result);
+  const result = await updateCar(id, body);
   if(result){
     updateCarsList(id, result);
   }
