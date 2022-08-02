@@ -61,8 +61,6 @@ async function listGarage(page?: number): Promise<void> {
     _limit: '7'
   }
   const countCars = await getCars(body);
-  const firstElement =countCars[0].id as number;
-  const lastElement =countCars[countCars.length-1].id as number;
   const containerListGarage = document.querySelector('.container-garage-list') as HTMLElement;
   const listGarage = document.createElement('ul');
   listGarage.className = 'garage-list';

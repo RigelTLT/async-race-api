@@ -11,6 +11,10 @@ export async function getWinner (id: number){
   const data = await response.json();
   return data;
 }
+export async function getCountWinners(){
+  const countCars = await getWinners(); 
+  return countCars.length;
+}
 export async function createWinner(body: IWinner) {
   const response = await fetch(`${baseUrl}${path.winners}`, {
     method: "POST",

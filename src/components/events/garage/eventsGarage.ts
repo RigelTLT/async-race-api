@@ -78,3 +78,22 @@ export async function clickUpdateCar(id: number): Promise<void>{
     updateCarsList(id, result);
   }
 }
+
+export function openPageCar(){
+  const navigation = document.querySelector('.to-winners') as HTMLInputElement;
+    if(navigation.classList.contains('button-navigation__active')){
+      navigation.classList.remove('button-navigation__active');
+    }
+  const toGarage = document.querySelector('.to-garage') as HTMLInputElement;
+  if(!toGarage.classList.contains('button-navigation__active')){
+    toGarage.classList.add('button-navigation__active');
+  }
+  const sectionGarage = document.querySelector('.garage') as HTMLInputElement;
+  if(sectionGarage.style.display === 'none'){
+    sectionGarage.style.display = 'block';
+  }
+  const sectionWinners = document.querySelector('.winners') as HTMLInputElement;
+  if(sectionWinners.style.display === 'block'){
+    sectionWinners.style.display = 'none';
+  }
+}

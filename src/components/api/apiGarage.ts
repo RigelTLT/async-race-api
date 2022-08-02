@@ -7,6 +7,11 @@ export async function getCars (params?: Iparams){
   const data = await response.json();
   return data;
   }
+  export async function getCar (id: number){
+    const response = await fetch(`${baseUrl}${path.garage}/${id}`);
+    const data = await response.json();
+    return data;
+  }
   export async function getCountCars(){
     const countCars = await getCars(); 
     return countCars.length;
