@@ -1,6 +1,6 @@
 import { getCars, getCountCars } from '../../api/apiGarage';
 import {ICarBase} from '../../interface/interface';
-import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar, eventChangePage } from '../../events/garage/addEventsGarage';
+import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar, eventChangePage, eventStartCar, eventResetCar } from '../../events/garage/addEventsGarage';
 
 export function createControlCarForm(id: number): void {
   const elemetListGarage = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
@@ -31,6 +31,8 @@ export function createControlCarForm(id: number): void {
   eventDeleteCar();
   eventCheckUpdateCar();
   eventUpdateCar();
+  eventStartCar(id);
+  eventResetCar(id);
 }
 export async function createTraceCar(element: ICarBase): Promise<void> {
   const elemetListGarage = document.querySelector(`.garage-list__element[data-id="${element.id}"]`) as HTMLElement;
@@ -72,7 +74,7 @@ async function listGarage(page?: number): Promise<void> {
     elemetListGarage.setAttribute('data-id', `${element.id}`);
     listGarage.append(elemetListGarage);
     createControlCarForm(element.id);
-    createTraceCar(element); 
+    createTraceCar(element);
     }
   });
 }

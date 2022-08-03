@@ -1,19 +1,21 @@
+.garage-list{
+  list-style-type: none;
+}
 .trace-car{
   border-bottom: 2px solid;
-  display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
   margin-bottom: 10px;
 }
 .svg-car{
   width:155px;
   height: 75px;
+  z-index: 2;
+  position: absolute;
+  /*transition: 2s;
+  margin-left: calc(95% - 155px);*/
 }
 .flag{
   height:75px;
   width: 75px;
-  padding-right: 30px;
+  padding-left: calc(90% - 75px);
+  z-index: 1;
 }

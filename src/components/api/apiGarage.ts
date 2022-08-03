@@ -45,3 +45,11 @@ export async function deleteCar(id: number) {
   const employee = await response.json();
   return employee;
 }
+export async function startStopDriveCar(id: number, status: string) {
+  const response = await fetch(`${baseUrl}${path.engine}?id=${id}&status=${status}`, {
+    method: "PATCH",
+  });
+  const employee = await response.json();
+  return employee;
+}
+
