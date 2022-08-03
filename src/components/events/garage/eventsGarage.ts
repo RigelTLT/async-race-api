@@ -16,6 +16,7 @@ function rgbToHex(rgb:string) {
 export async function clickCreateCar(){
   const nameCar = document.querySelector('.name-car__create') as HTMLInputElement;
   const colorCar = document.querySelector('.color-car__create') as HTMLInputElement;
+  if(nameCar.value){
   const body: IparamsCar  = {
     name: nameCar.value,
     color: colorCar.value
@@ -23,6 +24,9 @@ export async function clickCreateCar(){
   const result = await createCar(body);
   if(result){
     addCarsList(result.id, result);
+  }}
+  else{
+    throw new Error('Field "name" is empty');
   }
 }
 
@@ -104,7 +108,7 @@ export async function changePageNumber(event: Event) {
   let next = document.querySelector('.next') as HTMLInputElement;
   let prev = document.querySelector('.prev') as HTMLInputElement;
   const countCars = await getCountCars();
-  const maxPage = ((countCars - (countCars % 7)) / 7)+1;
+  const maxPage = Math.ceil(countCars/7);
   if(countCars>7) {
     if((event.target as HTMLElement).classList.contains('next') && Number(numberPage) < maxPage){
       numberPage = `${Number(numberPage)+1}`;
