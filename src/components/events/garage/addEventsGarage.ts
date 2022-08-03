@@ -1,8 +1,12 @@
-import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber } from "./eventsGarage";
+import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber, generateCars } from "./eventsGarage";
 
 export function eventAddCar(){
   const event = document.querySelector('.button-car__create') as HTMLInputElement;
   event.addEventListener('click', clickCreateCar);
+}
+export function eventGenerateCar(){
+  const event = document.querySelector('.button-car__generate') as HTMLInputElement;
+  event.addEventListener('click', generateCars);
 }
 export function eventCheckUpdateCar(){
   const event = document.querySelectorAll('.button-edit');

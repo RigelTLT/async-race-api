@@ -1,4 +1,4 @@
-import { eventAddCar } from '../../events/garage/addEventsGarage';
+import { eventAddCar, eventGenerateCar } from '../../events/garage/addEventsGarage';
 import { createhList } from './createList';
 
 export async function createCarForm(){
@@ -50,6 +50,7 @@ export async function GenerateCarsForm(){
   generateButtonCar.className = 'button-car button-car__generate';
   generateButtonCar.innerHTML = 'Generate';
   garage.append(generateButtonCar);
+  eventGenerateCar();
 }
 
 export async function buttonRaceForm(){
