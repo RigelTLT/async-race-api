@@ -1,4 +1,4 @@
-import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar } from "./eventsGarage";
+import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber } from "./eventsGarage";
 
 export function eventAddCar(){
   const event = document.querySelector('.button-car__create') as HTMLInputElement;
@@ -23,4 +23,11 @@ el.addEventListener('click', clickDeleteCar);
 export function eventOpenPageCar(){
   const event = document.querySelector('.to-garage') as HTMLInputElement;
   event.addEventListener('click', openPageCar);
+}
+export function eventChangePage(){
+  const event = document.querySelectorAll('.button-list');
+  console.log(event);
+  event.forEach((el)=>{
+el.addEventListener('click', changePageNumber);
+  })
 }

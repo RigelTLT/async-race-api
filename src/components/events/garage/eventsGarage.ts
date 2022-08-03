@@ -1,5 +1,5 @@
-import { getCars, createCar, updateCar, deleteCar } from '../../api/apiGarage';
-import { addCarsList, deleteCarsList, updateCarsList } from './refreshGarageList';
+import { getCars, getCountCars, createCar, updateCar, deleteCar } from '../../api/apiGarage';
+import { addCarsList, deleteCarsList, updateCarsList, changeListPage } from './refreshGarageList';
 import { IparamsCar } from '../../interface/interface'
 
 function componentToHex(c:number) {
@@ -95,5 +95,36 @@ export function openPageCar(){
   const sectionWinners = document.querySelector('.winners') as HTMLInputElement;
   if(sectionWinners.style.display === 'block'){
     sectionWinners.style.display = 'none';
+  }
+}
+
+export async function changePageNumber(event: Event) {
+  const elmentPage = (document.querySelector('.number-page') as HTMLElement);
+  let numberPage = elmentPage.innerHTML;
+  let next = document.querySelector('.next') as HTMLInputElement;
+  let prev = document.querySelector('.prev') as HTMLInputElement;
+  const countCars = await getCountCars();
+  const maxPage = ((countCars - (countCars % 7)) / 7)+1;
+  if(countCars>7) {
+    if((event.target as HTMLElement).classList.contains('next') && Number(numberPage) < maxPage){
+      numberPage = `${Number(numberPage)+1}`;
+      if(Number(numberPage) === maxPage){
+        next.disabled = true;
+      }
+      prev.disabled = false;
+    }
+    if((event.target as HTMLElement).classList.contains('prev') && Number(numberPage) > 1){
+      numberPage = `${Number(numberPage)-1}`;
+      if(Number(numberPage) === 1){
+        prev.disabled = true;
+      }
+      next.disabled = false;
+    }
+    elmentPage.innerHTML =numberPage;
+    const params ={
+      _page: numberPage,
+      _limit: '7'
+    }
+    changeListPage(params);
   }
 }

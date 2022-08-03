@@ -1,5 +1,5 @@
 import {getCountCars, getCars} from '../../api/apiGarage';
-import {ICarBase} from '../../interface/interface';
+import {ICarBase, Iparams} from '../../interface/interface';
 import {createControlCarForm, createTraceCar} from '../../ui/garage/createList'
 
 async function replaceCars(idBaseNumber: number){
@@ -81,4 +81,32 @@ export async function updateCarsList(id: number, element: ICarBase){
   nameInputCar.disabled = true;
   colorInputCar.disabled = true;
   button.disabled = true;
+}
+
+
+export async function changeListPage(params: Iparams){
+  const listCars = await getCars(params);
+  const listPageCar = document.querySelectorAll('.garage-list__element');
+  let listLength = 0;
+  listCars.length-1<listPageCar.length-1?listLength = listCars.length:listLength = listPageCar.length;
+  for(let i = 0; i < listLength; i++) {
+    const dataIdControls = (listPageCar[i].firstChild as HTMLElement).childNodes;
+    const nameCar = listPageCar[i].childNodes[1] as HTMLElement;
+    const ColorCar = (listPageCar[i].childNodes[2].firstChild as HTMLElement).firstChild as HTMLElement;
+    ColorCar.style.fill = listCars[i].color;
+    ColorCar.setAttribute('data-id', `${listCars[i].id}`)
+    dataIdControls.forEach((el) => {(el as HTMLElement).setAttribute('data-id', `${listCars[i].id}`);});
+    nameCar.innerHTML = listCars[i].name;
+    listPageCar[i].setAttribute('data-id', `${listCars[i].id}`);
+  }
+  if(listCars.length-1<listPageCar.length-1) {
+    for(let i = listCars.length; i<listPageCar.length; i++){
+      (listPageCar[i] as HTMLElement).remove();
+    }
+  }
+  if(listCars.length-1>listPageCar.length-1) {
+    for(let i = listPageCar.length; i<listCars.length; i++){
+      await addCarsList(listCars[i].id, listCars[i]);
+    }
+  }
 }

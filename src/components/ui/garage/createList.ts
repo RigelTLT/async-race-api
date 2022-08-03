@@ -1,6 +1,6 @@
 import { getCars, getCountCars } from '../../api/apiGarage';
 import {ICarBase} from '../../interface/interface';
-import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar } from '../../events/garage/addEventsGarage';
+import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar, eventChangePage } from '../../events/garage/addEventsGarage';
 
 export function createControlCarForm(id: number): void {
   const elemetListGarage = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
@@ -111,6 +111,7 @@ async function TitleGarage(): Promise<void> {
   nextListPage.disabled = true;
   }
   ListPage.append(nextListPage);
+  eventChangePage();
   listGarage();   
 }
 

@@ -73,11 +73,9 @@ export async function listWinners(data?: IparamsSortWinners): Promise<void> {
   let body = {};
   !data? body = {_page: '1', _limit: '10', _sort: 'id', _order: 'ASC'}:body = data;
   const winners = await getWinners();
-  console.log(winners);
   const table = document.querySelector('.table-winners') as HTMLElement;
   for(let i=0; i<winners.length; i++) {
     const carProperty = await getCar(winners[i].id);
-    console.log(carProperty);
     const trHeader = document.createElement('tr');
     trHeader.className = 'tr-header';
     table.append(trHeader);
