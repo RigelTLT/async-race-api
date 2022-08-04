@@ -1,4 +1,4 @@
-import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber, generateCars, startCar, resetCar } from "./eventsGarage";
+import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber, generateCars, startCar, resetCar, raceCars } from "./eventsGarage";
 
 export function eventAddCar(){
   const event = document.querySelector('.button-car__create') as HTMLInputElement;
@@ -43,4 +43,8 @@ export function eventResetCar(id: number){
   const event = document.querySelector(`.button-reset[data-id="${id}"]`) as HTMLInputElement;
   event.addEventListener('click', ()=>{
     resetCar(id)});
+}
+export function eventRaceCars(){
+  const event = document.querySelector(`.button-race`) as HTMLInputElement;
+  event.addEventListener('click', raceCars);
 }

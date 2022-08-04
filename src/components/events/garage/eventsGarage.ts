@@ -154,7 +154,7 @@ export async function generateCars(){
 
 export async function startCar(id: number){
   const start = await startStopDriveCar(id,'started');
-  const time = start.distance / start.velocity / 1000;
+  const time = start.distance / start.velocity / 2000;
   const updateCar = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
   const startButtonRace = document.querySelector(`.button-start-race[data-id="${id}"]`) as HTMLInputElement;
   startButtonRace.disabled = true;
@@ -166,6 +166,7 @@ export async function startCar(id: number){
     const drive = await startStopDriveCar(id,'drive');
     if(drive){
       valueColorCar.style.marginLeft = 'calc(95% - 155px)';
+      return time;
     }
   } catch(err){
     const randomDistance = Math.floor(Math.random()*80);
@@ -182,4 +183,50 @@ export async function resetCar(id: number){
   const valueColorCar = updateCar.childNodes[2].firstChild as HTMLElement;
   valueColorCar.style.transition = `0s`;
     valueColorCar.style.marginLeft = `0`;
+}
+export async function startRaceCar(id : Array<number>){
+  let arrayTime =[];
+  for(let i = 0; i < id.length; i++) {
+    const start = await startStopDriveCar(id[i],'started');
+    const time = start.distance / start.velocity / 2000;
+    arrayTime.push(time);
+    const updateCar = document.querySelector(`.garage-list__element[data-id="${id[i]}"]`) as HTMLElement;
+    const startButtonRace = document.querySelector(`.button-start-race[data-id="${id[i]}"]`) as HTMLInputElement;
+    startButtonRace.disabled = true;
+    const resetButtonRace = document.querySelector(`.button-reset[data-id="${id[i]}"]`) as HTMLInputElement;
+    resetButtonRace.disabled = false;
+    const valueColorCar = updateCar.childNodes[2].firstChild as HTMLElement;
+    valueColorCar.style.transition = `${time}s`;
+  }
+
+  for(let i = 0; i < id.length; i++) {
+    const updateCar = document.querySelector(`.garage-list__element[data-id="${id[i]}"]`) as HTMLElement;
+    const valueColorCar = updateCar.childNodes[2].firstChild as HTMLElement;
+    try{
+      const drive = await startStopDriveCar(id[i],'drive');
+      if(drive){
+        valueColorCar.style.marginLeft = 'calc(95% - 155px)';
+      }
+    } catch(err){
+      const randomDistance = Math.floor(Math.random()*80);
+      valueColorCar.style.marginLeft = `calc(${randomDistance}% - 155px)`;
+    }
+}
+return arrayTime;
+}
+export async function raceCars(){
+  const cars = document.querySelectorAll('.garage-list__element');
+  let baseCar = [];
+
+  /*for (let index = 0; index < cars.length; index++) {
+    const id = cars[index].getAttribute('data-id');
+    const time = await startCar(Number(id));
+    baseCar.push({id, time});
+  }*/
+  for (let index = 0; index < cars.length; index++) {
+    const id = cars[index].getAttribute('data-id');
+    baseCar.push(Number(id));
+  }
+  const time = startRaceCar(baseCar);
+  console.log(baseCar, time);
 }
