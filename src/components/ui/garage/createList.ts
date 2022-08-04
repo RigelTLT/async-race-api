@@ -84,6 +84,9 @@ async function TitleGarage(): Promise<void> {
   const containerListGarage = document.createElement('div');
   containerListGarage.className = 'container-garage-list';
   garage.append(containerListGarage);
+  const winnerGarage = document.createElement('span');
+  winnerGarage.className = 'winner';
+  containerListGarage.append(winnerGarage);
   const titleGarage = document.createElement('h1');
   titleGarage.className = 'title';
   titleGarage.innerHTML = `${countCars} cars in the garage`;

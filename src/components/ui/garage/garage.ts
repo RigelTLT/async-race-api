@@ -8,15 +8,15 @@ export async function createCarForm(){
   garage.append(createCarForm);
   const createNameCar = document.createElement('input');
   createNameCar.className = 'name-car name-car__create';
-  garage.append(createNameCar);
+  createCarForm.append(createNameCar);
   const createColorCar = document.createElement('input');
   createColorCar.className = 'color-car color-car__create';
   createColorCar.type = 'color';
-  garage.append(createColorCar);
+  createCarForm.append(createColorCar);
   const createButtonCar = document.createElement('button');
   createButtonCar.className = 'button-car button-car__create';
   createButtonCar.innerHTML = 'Create';
-  garage.append(createButtonCar);
+  createCarForm.append(createButtonCar);
   eventAddCar();
 }
 
@@ -28,17 +28,17 @@ export async function updateCarForm(){
   const updateNameCar = document.createElement('input');
   updateNameCar.className = 'name-car name-car__update';
   updateNameCar.disabled = true;
-  garage.append(updateNameCar);
+  updateCar.append(updateNameCar);
   const updateColorCar = document.createElement('input');
   updateColorCar.className = 'color-car color-car__update';
   updateColorCar.disabled = true;
   updateColorCar.type = 'color';
-  garage.append(updateColorCar);
+  updateCar.append(updateColorCar);
   const updateButtonCar = document.createElement('button');
   updateButtonCar.className = 'button-car button-car__update';
   updateButtonCar.innerHTML = 'Update';
   updateButtonCar.disabled = true;
-  garage.append(updateButtonCar);
+  updateCar.append(updateButtonCar);
 }
 
 export async function GenerateCarsForm(){
@@ -49,7 +49,7 @@ export async function GenerateCarsForm(){
   const generateButtonCar = document.createElement('button');
   generateButtonCar.className = 'button-car button-car__generate';
   generateButtonCar.innerHTML = 'Generate';
-  garage.append(generateButtonCar);
+  generateCar.append(generateButtonCar);
   eventGenerateCar();
 }
 

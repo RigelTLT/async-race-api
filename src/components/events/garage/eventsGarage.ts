@@ -1,6 +1,7 @@
 import { getCars, getCountCars, createCar, updateCar, deleteCar, startStopDriveCar } from '../../api/apiGarage';
 import { addCarsList, deleteCarsList, updateCarsList, changeListPage } from './refreshGarageList';
-import { IparamsCar } from '../../interface/interface'
+import { IparamsCar } from '../../interface/interface';
+import { addWinnerTable } from '.././winners/eventsWinners';
 
 function componentToHex(c:number) {
   const hex = c.toString(16);
@@ -220,18 +221,24 @@ export async function raceCars(){
   cars.forEach(car => {
     idsCar.push(Number(car.getAttribute('data-id')));
   })
-  console.log(idsCar);
-let detailSet = await Promise.all(idsCar.map(itemId => startCar(itemId)));
+let detailSet = ( await Promise.all(idsCar.map(itemId => startCar(itemId))) as Array<number>).map(el => el==null || el == undefined? el = 99: el);
 console.log(detailSet);
-  /*for (let index = 0; index < cars.length; index++) {
-    
-    const time = await startCar(Number(id));
-    baseCar.push({id, time});
-  }*/
-  /*for (let index = 0; index < cars.length; index++) {
-    const id = cars[index].getAttribute('data-id');
-    baseCar.push(Number(id));
+const winnerTime = Math.min.apply(null, detailSet);
+let idWinner = 0;
+for (let i = 0; i < detailSet.length; i++){
+  if(detailSet[i] === winnerTime){
+    idWinner = idsCar[i];
   }
-  const time = startRaceCar(baseCar);
-  console.log(baseCar, time);*/
 }
+announceWinner(idWinner, winnerTime);
+}
+
+async function announceWinner(id: number, time: number){
+  const fixTime = time.toFixed(2);
+  const сar = document.querySelector(`.garage-list__element[data-id="${id}"]`) as HTMLElement;
+  const nameCar = (сar.childNodes[1] as HTMLElement).innerHTML;
+  const container = document.querySelector('.winner') as HTMLElement;
+  container.innerHTML = `WINNER ${nameCar} time: ${fixTime}`;
+  addWinnerTable(id, Number(fixTime));
+}
+
