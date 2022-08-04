@@ -1,4 +1,4 @@
-import { eventAddCar, eventGenerateCar, eventRaceCars } from '../../events/garage/addEventsGarage';
+import { eventAddCar, eventGenerateCar, eventRaceCars, eventResetCars } from '../../events/garage/addEventsGarage';
 import { createhList } from './createList';
 
 export async function createCarForm(){
@@ -59,14 +59,16 @@ export async function buttonRaceForm(){
 controls.className = 'container-garage container__controls';
 garage.append(controls);
 const startButtonRace = document.createElement('button');
-startButtonRace.className = 'button-race';
+startButtonRace.className = 'button-race start-race__all';
 startButtonRace.innerHTML = 'Start Race';
 controls.append(startButtonRace);
 const resetButtonRace = document.createElement('button');
-resetButtonRace.className = 'button-race';
+resetButtonRace.className = 'button-race reset-race__all';
 resetButtonRace.innerHTML = 'Reset Race';
+resetButtonRace.disabled = true;
 controls.append(resetButtonRace);
 eventRaceCars();
+eventResetCars();
 }
 
 

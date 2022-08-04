@@ -185,38 +185,12 @@ export async function resetCar(id: number){
   valueColorCar.style.transition = `0s`;
     valueColorCar.style.marginLeft = `0`;
 }
-export async function startRaceCar(id : Array<number>){
-  let arrayTime =[];
-  for(let i = 0; i < id.length; i++) {
-    const start = await startStopDriveCar(id[i],'started');
-    const time = start.distance / start.velocity / 2000;
-    arrayTime.push(time);
-    const updateCar = document.querySelector(`.garage-list__element[data-id="${id[i]}"]`) as HTMLElement;
-    const startButtonRace = document.querySelector(`.button-start-race[data-id="${id[i]}"]`) as HTMLInputElement;
-    startButtonRace.disabled = true;
-    const resetButtonRace = document.querySelector(`.button-reset[data-id="${id[i]}"]`) as HTMLInputElement;
-    resetButtonRace.disabled = false;
-    const valueColorCar = updateCar.childNodes[2].firstChild as HTMLElement;
-    valueColorCar.style.transition = `${time}s`;
-  }
-
-  for(let i = 0; i < id.length; i++) {
-    const updateCar = document.querySelector(`.garage-list__element[data-id="${id[i]}"]`) as HTMLElement;
-    const valueColorCar = updateCar.childNodes[2].firstChild as HTMLElement;
-    try{
-      const drive = await startStopDriveCar(id[i],'drive');
-      if(drive){
-        valueColorCar.style.marginLeft = 'calc(95% - 155px)';
-      }
-    } catch(err){
-      const randomDistance = Math.floor(Math.random()*80);
-      valueColorCar.style.marginLeft = `calc(${randomDistance}% - 155px)`;
-    }
-}
-return arrayTime;
-}
 export async function raceCars(){
   const cars = document.querySelectorAll('.garage-list__element');
+  const reset = document.querySelector(`.reset-race__all`) as HTMLInputElement;
+  reset.disabled = false;
+  const start = document.querySelector(`.start-race__all`) as HTMLInputElement;
+  start.disabled = true;
   let idsCar = [] as Array<number>;
   cars.forEach(car => {
     idsCar.push(Number(car.getAttribute('data-id')));
@@ -242,3 +216,15 @@ async function announceWinner(id: number, time: number){
   addWinnerTable(id, Number(fixTime));
 }
 
+export async function resetRace(){
+  const cars = document.querySelectorAll('.garage-list__element');
+  const reset = document.querySelector(`.reset-race__all`) as HTMLInputElement;
+  reset.disabled = true;
+  const start = document.querySelector(`.start-race__all`) as HTMLInputElement;
+  start.disabled = false;
+  let idsCar = [] as Array<number>;
+  cars.forEach(car => {
+    idsCar.push(Number(car.getAttribute('data-id')));
+  })
+  await Promise.all(idsCar.map(itemId => resetCar(itemId)));
+}
