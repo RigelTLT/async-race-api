@@ -216,17 +216,22 @@ return arrayTime;
 }
 export async function raceCars(){
   const cars = document.querySelectorAll('.garage-list__element');
-  let baseCar = [];
-
+  let idsCar = [] as Array<number>;
+  cars.forEach(car => {
+    idsCar.push(Number(car.getAttribute('data-id')));
+  })
+  console.log(idsCar);
+let detailSet = await Promise.all(idsCar.map(itemId => startCar(itemId)));
+console.log(detailSet);
   /*for (let index = 0; index < cars.length; index++) {
-    const id = cars[index].getAttribute('data-id');
+    
     const time = await startCar(Number(id));
     baseCar.push({id, time});
   }*/
-  for (let index = 0; index < cars.length; index++) {
+  /*for (let index = 0; index < cars.length; index++) {
     const id = cars[index].getAttribute('data-id');
     baseCar.push(Number(id));
   }
   const time = startRaceCar(baseCar);
-  console.log(baseCar, time);
+  console.log(baseCar, time);*/
 }
