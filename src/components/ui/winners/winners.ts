@@ -9,7 +9,7 @@ export async function titleWinners(): Promise<void> {
   containerListWinners.className = 'container-Winners-list';
   winners.append(containerListWinners);
   const titleWinners = document.createElement('h1');
-  titleWinners.className = 'title';
+  titleWinners.className = 'title-winners';
   titleWinners.innerHTML = `${CountWinners} winning cars`;
   containerListWinners.append(titleWinners);
   const pageTitleWinners = document.createElement('span');
@@ -17,11 +17,11 @@ export async function titleWinners(): Promise<void> {
   pageTitleWinners.innerHTML = `Page #`;
   containerListWinners.append(pageTitleWinners);
   const pageWinners = document.createElement('span');
-  pageWinners.className = 'Winners-list__page number-page';
+  pageWinners.className = 'Winners-list__page number-page__winners';
   pageWinners.innerHTML = `1`;
   containerListWinners.append(pageWinners);
   const ListPage = document.createElement('div');
-  ListPage.className = 'container-list__page';
+  ListPage.className = 'container-list-winners__page';
   containerListWinners.append(ListPage);
   const prevListPage = document.createElement('button');
   prevListPage.className = 'button-list prev__winers';
@@ -70,14 +70,14 @@ export  function listHeadersWinners() {
   
 }
 export async function listWinners(data?: IparamsSortWinners): Promise<void> {
-  let body = {};
+  let body = {} as IparamsSortWinners;
   !data? body = {_page: '1', _limit: '10', _sort: 'id', _order: 'ASC'}:body = data;
-  const winners = await getWinners();
+  const winners = await getWinners(body);
   const table = document.querySelector('.table-winners') as HTMLElement;
   for(let i=0; i<winners.length; i++) {
     const carProperty = await getCar(winners[i].id);
     const trHeader = document.createElement('tr');
-    trHeader.className = 'tr-header';
+    trHeader.className = 'tr-winner';
     table.append(trHeader);
     const idColumn = document.createElement('td');
     idColumn.className = 'td-cell id-cell';

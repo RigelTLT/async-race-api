@@ -2,6 +2,7 @@ import { getCars, getCountCars, createCar, updateCar, deleteCar, startStopDriveC
 import { addCarsList, deleteCarsList, updateCarsList, changeListPage } from './refreshGarageList';
 import { IparamsCar } from '../../interface/interface';
 import { addWinnerTable } from '.././winners/eventsWinners';
+import { refreshWinnerList} from '../../events/winners/refreshWinnersList';
 
 function componentToHex(c:number) {
   const hex = c.toString(16);
@@ -196,7 +197,6 @@ export async function raceCars(){
     idsCar.push(Number(car.getAttribute('data-id')));
   })
 let detailSet = ( await Promise.all(idsCar.map(itemId => startCar(itemId))) as Array<number>).map(el => el==null || el == undefined? el = 99: el);
-console.log(detailSet);
 const winnerTime = Math.min.apply(null, detailSet);
 let idWinner = 0;
 for (let i = 0; i < detailSet.length; i++){
@@ -213,7 +213,8 @@ async function announceWinner(id: number, time: number){
   const nameCar = (сar.childNodes[1] as HTMLElement).innerHTML;
   const container = document.querySelector('.winner') as HTMLElement;
   container.innerHTML = `WINNER ${nameCar} time: ${fixTime}`;
-  addWinnerTable(id, Number(fixTime));
+  await addWinnerTable(id, Number(fixTime));
+  refreshWinnerList();
 }
 
 export async function resetRace(){
