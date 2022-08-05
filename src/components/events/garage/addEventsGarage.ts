@@ -29,7 +29,7 @@ export function eventOpenPageCar(){
   event.addEventListener('click', openPageCar);
 }
 export function eventChangePage(){
-  const event = document.querySelectorAll('.button-list');
+  const event = document.querySelectorAll('.button-list-garage');
   event.forEach((el)=>{
 el.addEventListener('click', changePageNumber);
   })

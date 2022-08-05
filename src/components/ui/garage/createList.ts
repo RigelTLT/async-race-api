@@ -103,13 +103,13 @@ async function TitleGarage(): Promise<void> {
   ListPage.className = 'container-list__page';
   containerListGarage.append(ListPage);
   const prevListPage = document.createElement('button');
-  prevListPage.className = 'button-list prev';
+  prevListPage.className = 'button-list button-list-garage prev';
   prevListPage.innerHTML = 'Prev';
   prevListPage.value = 'Prev';
   prevListPage.disabled = true;
   ListPage.append(prevListPage);
   const nextListPage = document.createElement('button');
-  nextListPage.className = 'button-list next';
+  nextListPage.className = 'button-list button-list-garage next';
   nextListPage.innerHTML = 'Next';
   nextListPage.value = 'Next';
   if(countCars < 7){

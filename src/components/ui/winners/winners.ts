@@ -1,6 +1,7 @@
 import { getWinners, getCountWinners } from '../../api/apiWinner';
 import { getCar } from '../../api/apiGarage';
 import { IparamsSortWinners } from '../../interface/interface';
+import { eventChangePageWinners } from '../../events/winners/addEventsWinners';
 
 export async function titleWinners(): Promise<void> {
   const CountWinners = await getCountWinners();
@@ -24,13 +25,13 @@ export async function titleWinners(): Promise<void> {
   ListPage.className = 'container-list-winners__page';
   containerListWinners.append(ListPage);
   const prevListPage = document.createElement('button');
-  prevListPage.className = 'button-list prev__winers';
+  prevListPage.className = 'button-list button-list-winners prev__winers';
   prevListPage.innerHTML = 'Prev';
   prevListPage.value = 'Prev';
   prevListPage.disabled = true;
   ListPage.append(prevListPage);
   const nextListPage = document.createElement('button');
-  nextListPage.className = 'button-list next__winers';
+  nextListPage.className = 'button-list button-list-winners next__winers';
   nextListPage.innerHTML = 'Next';
   nextListPage.value = 'Next';
   if(CountWinners < 10){
@@ -38,6 +39,7 @@ export async function titleWinners(): Promise<void> {
   }
   ListPage.append(nextListPage);
   listHeadersWinners();
+  eventChangePageWinners();
 }
 export  function listHeadersWinners() {
   const winners = document.querySelector('.winners') as HTMLElement;

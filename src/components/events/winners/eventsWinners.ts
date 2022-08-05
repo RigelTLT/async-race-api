@@ -1,4 +1,5 @@
-import { getWinner, createWinner, updateWinner } from '../../api/apiWinner';
+import { getWinner, createWinner, updateWinner, getCountWinners } from '../../api/apiWinner';
+import {refreshWinnerList} from '../../events/winners/refreshWinnersList';
 
 export function openPageWinners(){
   const navigation = document.querySelector('.to-garage') as HTMLInputElement;
@@ -27,5 +28,33 @@ export async function addWinnerTable(id: number, time: number){
   }else{
     const body = {id: id, wins: 1, time: time}
     const tet = await createWinner(body);
+  }
+}
+
+export async function changePageNumberWinners(event: Event) {
+  const elmentPage = (document.querySelector('.number-page__winners') as HTMLElement);
+  let numberPage = elmentPage.innerHTML;
+  let next = document.querySelector('.next__winers') as HTMLInputElement;
+  let prev = document.querySelector('.prev__winers') as HTMLInputElement;
+  const countCars = await getCountWinners();
+  const maxPage = Math.ceil(countCars/10);
+  if(countCars>10) {
+    if((event.target as HTMLElement).classList.contains('next__winers') && Number(numberPage) < maxPage){
+      numberPage = `${Number(numberPage)+1}`;
+      
+      if(Number(numberPage) === maxPage){
+        next.disabled = true;
+      }
+      prev.disabled = false;
+    }
+    if((event.target as HTMLElement).classList.contains('prev__winers') && Number(numberPage) > 1){
+      numberPage = `${Number(numberPage)-1}`;
+      if(Number(numberPage) === 1){
+        prev.disabled = true;
+      }
+      next.disabled = false;
+    }
+    elmentPage.innerHTML = numberPage;
+    refreshWinnerList();
   }
 }
