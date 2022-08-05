@@ -138,8 +138,8 @@ export async function generateCars(){
   const arrayCars = ['AUDI', 'BENTLEY', 'BMW', 'CITROEN', 'FERRARI', 'FORD', 'LAMBORGHINI', 'NISSAN', 'MITSUBISHI', 'LEXUS'];
   const arrayModels = ['100', 'Defender', '5', 'М5', 'Arnage', 'Cygnet', 'Arcadia', 'Leading', 'MPV', 'Florida'];
   for(let i =0;i<100;i++){
-    const randomNumberOne = Math.floor(Math.random()*11);
-    const randomNumberTwo = Math.floor(Math.random()*11);
+    const randomNumberOne = Math.floor(Math.random()*10);
+    const randomNumberTwo = Math.floor(Math.random()*10);
     const randomColor = `#${(Math.random().toString(16) + '000000').substring(2,8).toUpperCase()}`;
     const randomName = `${arrayCars[randomNumberOne]} ${arrayModels[randomNumberTwo]}`;
     const body: IparamsCar  = {

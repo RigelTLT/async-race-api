@@ -1,6 +1,7 @@
 import {getCountCars, getCars} from '../../api/apiGarage';
 import {ICarBase, Iparams} from '../../interface/interface';
 import {createControlCarForm, createTraceCar} from '../../ui/garage/createList'
+import {resetRace} from '../../events/garage/eventsGarage';
 
 async function replaceCars(idBaseNumber: number){
   const listCars = await getCars();
@@ -109,4 +110,5 @@ export async function changeListPage(params: Iparams){
       await addCarsList(listCars[i].id, listCars[i]);
     }
   }
+  await resetRace();
 }
