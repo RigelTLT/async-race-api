@@ -1,7 +1,7 @@
 import { getWinners, getCountWinners } from '../../api/apiWinner';
 import { getCar } from '../../api/apiGarage';
 import { IparamsSortWinners } from '../../interface/interface';
-import { eventChangePageWinners } from '../../events/winners/addEventsWinners';
+import { eventChangePageWinners, eventfilterWinners, eventfilterTime } from '../../events/winners/addEventsWinners';
 
 export async function titleWinners(): Promise<void> {
   const CountWinners = await getCountWinners();
@@ -72,7 +72,8 @@ export  function listHeadersWinners() {
   timeColumn.className = 'th-header time-column';
   timeColumn.innerHTML = 'Time';
   trHeader.append(timeColumn);
-  
+  eventfilterWinners();
+  eventfilterTime();
 }
 export async function listWinners(data?: IparamsSortWinners): Promise<void> {
   let body = {} as IparamsSortWinners;
@@ -113,7 +114,7 @@ export async function listWinners(data?: IparamsSortWinners): Promise<void> {
     trHeader.append(timeColumn);
   }
 }
-export function createPageWinners(){
-  titleWinners();
+export async function createPageWinners(){
+  await titleWinners();
   listWinners();
 }

@@ -1,5 +1,5 @@
 import { getWinner, createWinner, updateWinner, getCountWinners } from '../../api/apiWinner';
-import {refreshWinnerList} from '../../events/winners/refreshWinnersList';
+import {refreshWinnerList, collectingTableInformation, changehWinnersListPage} from '../../events/winners/refreshWinnersList';
 
 export function openPageWinners(){
   const navigation = document.querySelector('.to-garage') as HTMLInputElement;
@@ -56,4 +56,39 @@ export async function changePageNumberWinners(event: Event) {
     elmentPage.innerHTML = numberPage;
     refreshWinnerList();
   }
+}
+
+export async function filterWins(){
+  const data = collectingTableInformation();
+  const winsFilter = document.querySelector('.wins-column') as HTMLElement;
+  const timeFilter = document.querySelector('.time-column') as HTMLElement;
+  if(data._sort === 'wins' && winsFilter.innerHTML === 'Wins ↓'){
+    winsFilter.innerHTML = 'Wins ↑';
+    data._sort = 'wins';
+    data._order = 'DESC';
+  }
+  else if((data._sort === 'id' || data._sort === 'time') || winsFilter.innerHTML === 'Wins ↑'){
+    winsFilter.innerHTML = 'Wins ↓';
+    data._sort = 'wins';
+    data._order = 'ASC';
+  }
+  timeFilter.innerHTML = 'Time';
+  await changehWinnersListPage(data);
+}
+export async function filterTime(){
+  const data = collectingTableInformation();
+  const winsFilter = document.querySelector('.wins-column') as HTMLElement;
+  const timeFilter = document.querySelector('.time-column') as HTMLElement;
+  if(data._sort === 'time' && timeFilter.innerHTML === 'Time ↓'){
+    timeFilter.innerHTML = 'Time ↑';
+    data._sort = 'time';
+    data._order = 'DESC';
+  }
+  else if((data._sort === 'id' || data._sort === 'wins') || timeFilter.innerHTML === 'Time ↑'){
+    timeFilter.innerHTML = 'Time ↓';
+    data._sort = 'time';
+    data._order = 'ASC';
+  }
+  winsFilter.innerHTML = 'Wins';
+  await changehWinnersListPage(data);
 }

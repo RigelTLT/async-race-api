@@ -1,5 +1,5 @@
 import { openPageWinners } from "./eventsWinners";
-import {changePageNumberWinners} from '../../events/winners/eventsWinners';
+import {changePageNumberWinners, filterWins, filterTime} from '../../events/winners/eventsWinners';
 
 export function eventOpenWinnersCar(){
   const event = document.querySelector('.to-winners') as HTMLInputElement;
@@ -10,4 +10,12 @@ export function eventChangePageWinners(){
   event.forEach((el)=>{
 el.addEventListener('click', changePageNumberWinners);
   })
+}
+export function eventfilterWinners(){
+  const event = document.querySelector('.wins-column') as HTMLInputElement;
+  event.addEventListener('click', filterWins);
+}
+export function eventfilterTime(){
+  const event = document.querySelector('.time-column') as HTMLInputElement;
+  event.addEventListener('click', filterTime);
 }
