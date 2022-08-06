@@ -1,5 +1,5 @@
 import { getCars, getCountCars } from '../../api/apiGarage';
-import {ICarBase} from '../../interface/interface';
+import { ICarBase } from '../../interface/interface';
 import { eventDeleteCar, eventUpdateCar, eventCheckUpdateCar, eventChangePage, eventStartCar, eventResetCar } from '../../events/garage/addEventsGarage';
 
 export function createControlCarForm(id: number): void {
@@ -41,40 +41,40 @@ export async function createTraceCar(element: ICarBase): Promise<void> {
   nameCar.innerHTML = element.name;
   elemetListGarage.append(nameCar);
   const carTrace = document.createElement('div');
-  carTrace.className = 'trace-car'
+  carTrace.className = 'trace-car';
   elemetListGarage.append(carTrace);
   const svgElem = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-	car = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-  svgElem.classList.add("svg-car");
+    car = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  svgElem.classList.add('svg-car');
   car.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', 'assets/svg/car.svg#Capa_1');
   car.style.fill = `${element.color}`;
   car.setAttribute('data-id', `${element.id}`);
-svgElem.append(car);
-carTrace.append(svgElem);
-const flag = document.createElement('img');
-flag.className = 'flag';
-flag.src = 'assets/img/flag.png';
-carTrace.append(flag);
+  svgElem.append(car);
+  carTrace.append(svgElem);
+  const flag = document.createElement('img');
+  flag.className = 'flag';
+  flag.src = 'assets/img/flag.png';
+  carTrace.append(flag);
 }
 
 async function listGarage(page?: number): Promise<void> {
   const body = {
-    _page: `${page? page:'1'}`,
-    _limit: '7'
-  }
+    _page: `${page ? page : '1'}`,
+    _limit: '7',
+  };
   const countCars = await getCars(body);
   const containerListGarage = document.querySelector('.container-garage-list') as HTMLElement;
-  const listGarage = document.createElement('ul');
-  listGarage.className = 'garage-list';
-  containerListGarage.append(listGarage);
-  countCars.map((element:{name: string, color: string, id: number}) => {
-    if(element){
+  const list = document.createElement('ul');
+  list.className = 'garage-list';
+  containerListGarage.append(list);
+  countCars.map((element:{ name: string, color: string, id: number }) => {
+    if (element) {
       const elemetListGarage = document.createElement('li');
-    elemetListGarage.className = 'garage-list__element';
-    elemetListGarage.setAttribute('data-id', `${element.id}`);
-    listGarage.append(elemetListGarage);
-    createControlCarForm(element.id);
-    createTraceCar(element);
+      elemetListGarage.className = 'garage-list__element';
+      elemetListGarage.setAttribute('data-id', `${element.id}`);
+      list.append(elemetListGarage);
+      createControlCarForm(element.id);
+      createTraceCar(element);
     }
   });
 }
@@ -93,11 +93,11 @@ async function TitleGarage(): Promise<void> {
   containerListGarage.append(titleGarage);
   const pageTitleGarage = document.createElement('span');
   pageTitleGarage.className = 'garage-list__page';
-  pageTitleGarage.innerHTML = `Page #`;
+  pageTitleGarage.innerHTML = 'Page #';
   containerListGarage.append(pageTitleGarage);
   const pageGarage = document.createElement('span');
   pageGarage.className = 'garage-list__page number-page';
-  pageGarage.innerHTML = `1`;
+  pageGarage.innerHTML = '1';
   containerListGarage.append(pageGarage);
   const ListPage = document.createElement('div');
   ListPage.className = 'container-list__page';
@@ -112,8 +112,8 @@ async function TitleGarage(): Promise<void> {
   nextListPage.className = 'button-list button-list-garage next';
   nextListPage.innerHTML = 'Next';
   nextListPage.value = 'Next';
-  if(countCars < 7){
-  nextListPage.disabled = true;
+  if (countCars < 7) {
+    nextListPage.disabled = true;
   }
   ListPage.append(nextListPage);
   eventChangePage();
@@ -122,7 +122,7 @@ async function TitleGarage(): Promise<void> {
 
 export function createhList():void {
   const garageList = document.querySelector('.container-garage-list') as HTMLElement;
-  if(garageList){
+  if (garageList) {
     garageList.remove();
   }
   TitleGarage();

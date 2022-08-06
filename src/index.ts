@@ -10,7 +10,7 @@ logoContainer.className = 'container-logo';
 body.append(logoContainer);
 const logo = document.createElement('img');
 logo.className = 'logo';
-logo.src = `./assets/img/logo.png`;
+logo.src = './assets/img/logo.png';
 logo.alt = 'Logo Race';
 logoContainer.append(logo);
 const navContainer = document.createElement('nav');

@@ -1,54 +1,56 @@
-import {clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber, generateCars, startCar, resetCar, raceCars, resetRace } from "./eventsGarage";
+import { clickDeleteCar, clickCreateCar, chekerUpdate, unlockUpdateCar, openPageCar, changePageNumber, generateCars, startCar, resetCar, raceCars, resetRace } from './eventsGarage';
 
-export function eventAddCar(){
+export function eventAddCar() {
   const event = document.querySelector('.button-car__create') as HTMLInputElement;
   event.addEventListener('click', clickCreateCar);
 }
-export function eventGenerateCar(){
+export function eventGenerateCar() {
   const event = document.querySelector('.button-car__generate') as HTMLInputElement;
   event.addEventListener('click', generateCars);
 }
-export function eventCheckUpdateCar(){
+export function eventCheckUpdateCar() {
   const event = document.querySelectorAll('.button-edit');
   event.forEach((el)=>{
-el.addEventListener('click', chekerUpdate);
-  })
+    el.addEventListener('click', chekerUpdate);
+  });
 }
-export function eventUpdateCar(){
+export function eventUpdateCar() {
   const event = document.querySelector('.button-car__update') as HTMLInputElement;
   event.addEventListener('click', unlockUpdateCar);
 }
-export function eventDeleteCar(){
+export function eventDeleteCar() {
   const event = document.querySelectorAll('.button-delete');
   event.forEach((el)=>{
-el.addEventListener('click', clickDeleteCar);
-  })
+    el.addEventListener('click', clickDeleteCar);
+  });
 }
-export function eventOpenPageCar(){
+export function eventOpenPageCar() {
   const event = document.querySelector('.to-garage') as HTMLInputElement;
   event.addEventListener('click', openPageCar);
 }
-export function eventChangePage(){
+export function eventChangePage() {
   const event = document.querySelectorAll('.button-list-garage');
   event.forEach((el)=>{
-el.addEventListener('click', changePageNumber);
-  })
+    el.addEventListener('click', changePageNumber);
+  });
 }
-export function eventStartCar(id: number){
+export function eventStartCar(id: number) {
   const event = document.querySelector(`.button-start-race[data-id="${id}"]`) as HTMLInputElement;
   event.addEventListener('click', ()=>{
-  startCar(id)});
+    startCar(id);
+  });
 }
-export function eventResetCar(id: number){
+export function eventResetCar(id: number) {
   const event = document.querySelector(`.button-reset[data-id="${id}"]`) as HTMLInputElement;
   event.addEventListener('click', ()=>{
-    resetCar(id)});
+    resetCar(id);
+  });
 }
-export function eventRaceCars(){
-  const event = document.querySelector(`.start-race__all`) as HTMLInputElement;
+export function eventRaceCars() {
+  const event = document.querySelector('.start-race__all') as HTMLInputElement;
   event.addEventListener('click', raceCars);
 }
-export function eventResetCars(){
-  const event = document.querySelector(`.reset-race__all`) as HTMLInputElement;
+export function eventResetCars() {
+  const event = document.querySelector('.reset-race__all') as HTMLInputElement;
   event.addEventListener('click', resetRace);
 }

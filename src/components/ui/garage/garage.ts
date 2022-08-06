@@ -1,26 +1,26 @@
 import { eventAddCar, eventGenerateCar, eventRaceCars, eventResetCars } from '../../events/garage/addEventsGarage';
 import { createhList } from './createList';
 
-export async function createCarForm(){
+export async function createCarForm() {
   const garage = document.querySelector('.garage') as HTMLElement;
-  const createCarForm = document.createElement('div');
-  createCarForm.className = 'container-garage container__create-car';
-  garage.append(createCarForm);
+  const carForm = document.createElement('div');
+  carForm.className = 'container-garage container__create-car';
+  garage.append(carForm);
   const createNameCar = document.createElement('input');
   createNameCar.className = 'input-car name-car__create';
-  createCarForm.append(createNameCar);
+  carForm.append(createNameCar);
   const createColorCar = document.createElement('input');
   createColorCar.className = 'color-car color-car__create';
   createColorCar.type = 'color';
-  createCarForm.append(createColorCar);
+  carForm.append(createColorCar);
   const createButtonCar = document.createElement('button');
   createButtonCar.className = 'button-car button-car__create';
   createButtonCar.innerHTML = 'Create';
-  createCarForm.append(createButtonCar);
+  carForm.append(createButtonCar);
   eventAddCar();
 }
 
-export async function updateCarForm(){
+export async function updateCarForm() {
   const garage = document.querySelector('.garage') as HTMLElement;
   const updateCar = document.createElement('div');
   updateCar.className = 'container-garage container__update-car';
@@ -41,7 +41,7 @@ export async function updateCarForm(){
   updateCar.append(updateButtonCar);
 }
 
-export async function GenerateCarsForm(){
+export async function GenerateCarsForm() {
   const garage = document.querySelector('.garage') as HTMLElement;
   const generateCar = document.createElement('div');
   generateCar.className = 'container-garage container__generate-car';
@@ -53,27 +53,27 @@ export async function GenerateCarsForm(){
   eventGenerateCar();
 }
 
-export async function buttonRaceForm(){
+export async function buttonRaceForm() {
   const garage = document.querySelector('.garage') as HTMLElement;
   const controls = document.createElement('div');
-controls.className = 'container-garage container__controls';
-garage.append(controls);
-const startButtonRace = document.createElement('button');
-startButtonRace.className = 'button-race start-race__all';
-startButtonRace.innerHTML = 'Start Race';
-controls.append(startButtonRace);
-const resetButtonRace = document.createElement('button');
-resetButtonRace.className = 'button-race reset-race__all';
-resetButtonRace.innerHTML = 'Reset Race';
-resetButtonRace.disabled = true;
-controls.append(resetButtonRace);
-eventRaceCars();
-eventResetCars();
+  controls.className = 'container-garage container__controls';
+  garage.append(controls);
+  const startButtonRace = document.createElement('button');
+  startButtonRace.className = 'button-race start-race__all';
+  startButtonRace.innerHTML = 'Start Race';
+  controls.append(startButtonRace);
+  const resetButtonRace = document.createElement('button');
+  resetButtonRace.className = 'button-race reset-race__all';
+  resetButtonRace.innerHTML = 'Reset Race';
+  resetButtonRace.disabled = true;
+  controls.append(resetButtonRace);
+  eventRaceCars();
+  eventResetCars();
 }
 
 
 
-export function createPageGarage(){
+export function createPageGarage() {
   createCarForm();
   updateCarForm();
   GenerateCarsForm();
