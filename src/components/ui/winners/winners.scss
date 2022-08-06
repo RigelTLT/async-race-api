@@ -1,4 +1,22 @@
+@import '../garage/garage.scss';
+
+.title-winners{
+  @extend %winner;
+}
 .svg-car__wins{
   width:120px;
   height: 75px;
+}
+.Winners-list__page{
+  @extend %title-page;
+}
+.winners-container{
+  display: flex;
+  justify-content: center;
+}
+.table-winners{
+  color: whitesmoke;
+    width: 50%;
+    text-align: center;
+    font-size: x-large;
 }

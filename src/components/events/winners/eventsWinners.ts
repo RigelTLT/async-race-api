@@ -41,7 +41,6 @@ export async function changePageNumberWinners(event: Event) {
   if(countCars>10) {
     if((event.target as HTMLElement).classList.contains('next__winers') && Number(numberPage) < maxPage){
       numberPage = `${Number(numberPage)+1}`;
-      
       if(Number(numberPage) === maxPage){
         next.disabled = true;
       }

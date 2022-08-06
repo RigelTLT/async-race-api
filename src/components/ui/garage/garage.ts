@@ -7,7 +7,7 @@ export async function createCarForm(){
   createCarForm.className = 'container-garage container__create-car';
   garage.append(createCarForm);
   const createNameCar = document.createElement('input');
-  createNameCar.className = 'name-car name-car__create';
+  createNameCar.className = 'input-car name-car__create';
   createCarForm.append(createNameCar);
   const createColorCar = document.createElement('input');
   createColorCar.className = 'color-car color-car__create';
@@ -26,7 +26,7 @@ export async function updateCarForm(){
   updateCar.className = 'container-garage container__update-car';
   garage.append(updateCar);
   const updateNameCar = document.createElement('input');
-  updateNameCar.className = 'name-car name-car__update';
+  updateNameCar.className = 'input-car name-car__update';
   updateNameCar.disabled = true;
   updateCar.append(updateNameCar);
   const updateColorCar = document.createElement('input');

@@ -1,15 +1,17 @@
 import { IparamsSortWinners, IWinner, ICarBase} from '../../interface/interface';
 import { getCountWinners, getWinners } from '../../api/apiWinner';
 import { getCar } from '../../api/apiGarage';
-import {listWinners} from '../../ui/winners/winners'
 
 async function refreshCountAndPage(){
   const countCars = await getCountWinners();
   const title = document.querySelector('.title-winners') as HTMLInputElement;
     title.innerHTML = `${countCars} winning cars`;
     const nextPage = document.querySelector('.next__winers') as HTMLInputElement;
+    const elmentPage = (document.querySelector('.number-page__winners') as HTMLElement);
+    let numberPage = Number(elmentPage.innerHTML);
+    const maxPage = Math.ceil(countCars/10);
   if(countCars > 10){
-    if(nextPage.disabled === true){
+    if(nextPage.disabled === true && numberPage<maxPage){
       nextPage.disabled = false;
     }
   }else{
@@ -57,11 +59,11 @@ export async function changehWinnersListPage(data: IparamsSortWinners){
   let listLength = 0;
   winners.length-1<listPageCar.length-1?listLength = winners.length:listLength = listPageCar.length;
   for(let i = 0; i < listLength; i++) {
-    const id = listPageCar[i].querySelector('id-cell') as HTMLElement;
-    const colorCar = (listPageCar[i].querySelector('svg-car__wins') as HTMLElement).firstChild  as HTMLElement;
-    const name = listPageCar[i].querySelector('name-cell') as HTMLElement;
-    const wins = listPageCar[i].querySelector('wins-cell') as HTMLElement;
-    const time = listPageCar[i].querySelector('time-cell') as HTMLElement;
+    const id = listPageCar[i].querySelector('.id-cell') as HTMLElement;
+    const colorCar = (listPageCar[i].querySelector('.svg-car__wins') as HTMLElement).firstChild as HTMLElement;
+    const name = listPageCar[i].querySelector('.name-cell') as HTMLElement;
+    const wins = listPageCar[i].querySelector('.wins-cell') as HTMLElement;
+    const time = listPageCar[i].querySelector('.time-cell') as HTMLElement;
     const cars = await getCar(winners[i].id);
     id.innerHTML = winners[i].id;
     name.innerHTML = cars.name;
@@ -81,6 +83,9 @@ export async function changehWinnersListPage(data: IparamsSortWinners){
     }
   }
 }
+
+function collectingTableInformation(){}
+
 export async function refreshWinnerList(){
   await refreshCountAndPage();
   const listPageCar = document.querySelectorAll('.tr-winner');
@@ -105,9 +110,6 @@ export async function refreshWinnerList(){
     _sort = 'time';
     _order = 'DESC';
   }
-  listPageCar.forEach(el => {
-    el.remove();
-  });
   const data = {_page: _page, _limit: '10', _sort: _sort, _order: _order}
   await changehWinnersListPage(data);
 }

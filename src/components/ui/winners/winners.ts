@@ -43,9 +43,12 @@ export async function titleWinners(): Promise<void> {
 }
 export  function listHeadersWinners() {
   const winners = document.querySelector('.winners') as HTMLElement;
+  const container = document.createElement('div');
+  container.className = 'winners-container';
+  winners.append(container);
   const table = document.createElement('table');
   table.className = 'table-winners';
-  winners.append(table);
+  container.append(table);
   const trHeader = document.createElement('tr');
   trHeader.className = 'tr-header';
   table.append(trHeader);

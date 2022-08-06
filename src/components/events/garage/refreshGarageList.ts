@@ -110,5 +110,8 @@ export async function changeListPage(params: Iparams){
       await addCarsList(listCars[i].id, listCars[i]);
     }
   }
-  await resetRace();
+  const raceСheck = document.querySelector('.reset-race__all') as HTMLInputElement;
+  if(!raceСheck.disabled){
+    await resetRace();
+  }
 }
